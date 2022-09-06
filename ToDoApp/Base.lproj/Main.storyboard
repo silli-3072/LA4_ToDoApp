@@ -42,7 +42,7 @@
                     <navigationItem key="navigationItem" title="ToDoリスト" id="bfS-Zq-k1V">
                         <barButtonItem key="rightBarButtonItem" title="+" id="9Og-RB-H08">
                             <connections>
-                                <segue destination="rBy-8S-4Mi" kind="show" id="ciE-fQ-uxQ"/>
+                                <segue destination="rBy-8S-4Mi" kind="show" identifier="addToDo" id="ciE-fQ-uxQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -14,10 +14,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let realm = try! Realm()
     
+    var todoArray = [String]()
+    var detailArray = [String]()
+    var dateArray = [String]()
+    
     let ToDo = ["ベランダの天井を治す","管理会社とコンタクトをとる","引越したいから物件を探す","引越しにかかる費用を割り出す"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         // Do any additional setup after loading the view.
     }
     

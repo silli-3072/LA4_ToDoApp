@@ -16,12 +16,14 @@ class AddViewController: UIViewController {
     
     let realm = try! Realm()
     
+    var todoArray = [String]()
+    var detailArray = [String]()
+    var dateArray = [String]()
+    
     var datePicker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let todo: ToDo? = read()
         
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 35))
         let spacelItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
@@ -53,17 +55,30 @@ class AddViewController: UIViewController {
     @IBAction func save() {
         let todo: ToDo? = read()
         
-        let title: String = todoTextField.text!
-        let detail: String = detailTextField.text!
-        let date: String = dateTextField.text!
+        let title = ToDo(value: todoArray)
+        let detail = ToDo(value: detailArray)
+        let date = ToDo(value: dateArray)
+
         
-        try! realm.write {
-            todo!.title = title
-            todo!.detail = detail
-            todo!.date = date
-            
+//        let title: String = todoTextField.text!
+//        let detail: String = detailTextField.text!
+//        let date: String = dateTextField.text!
+        
+        if todo != nil {
+            try! realm.write {
+                realm.add(title)
+                realm.add(detail)
+                realm.add(date)
+                
+            }
         }
         
+        self.navigationController?.popToRootViewController(animated: true)
+        
+        print("🇬🇭",title)
+        print("🇪🇬",detail)
+        print("🇬🇵",date)
+
     }
     
     
