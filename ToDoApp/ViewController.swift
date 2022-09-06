@@ -14,7 +14,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let realm = try! Realm()
     
-//    let ToDo = ["ベランダの天井を治す","管理会社とコンタクトをとる","引越したいから物件を探す","引越しにかかる費用を割り出す"]
+    //    let ToDo = ["ベランダの天井を治す","管理会社とコンタクトをとる","引越したいから物件を探す","引越しにかかる費用を割り出す"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +41,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //表示する値の設定
         cell.textLabel!.text = "\(userData[indexPath.row].title)"
         return cell
+        
+    }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
+            //削除処理を記述
+            let results = realm.objects(ToDo.self).filter()
+            
+            try! realm.write {
+                realm.delete(results)
+            }
+            
+            
+            completionHandler(true)
+        }
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
     
     
