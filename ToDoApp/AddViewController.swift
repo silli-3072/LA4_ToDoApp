@@ -53,31 +53,17 @@ class AddViewController: UIViewController {
     }
     
     @IBAction func save() {
-        let todo: ToDo? = read()
+        let todo = ToDo()
+        todo.title = todoTextField.text!
+        todo.detail = dateTextField.text!
+        todo.date = dateTextField.text!
         
-        let title = ToDo(value: todoArray)
-        let detail = ToDo(value: detailArray)
-        let date = ToDo(value: dateArray)
+        try! realm.write {
+            realm.add(todo)
+        }
 
         
-//        let title: String = todoTextField.text!
-//        let detail: String = detailTextField.text!
-//        let date: String = dateTextField.text!
-        
-        if todo != nil {
-            try! realm.write {
-                realm.add(title)
-                realm.add(detail)
-                realm.add(date)
-                
-            }
-        }
-        
         self.navigationController?.popToRootViewController(animated: true)
-        
-        print("🇬🇭",title)
-        print("🇪🇬",detail)
-        print("🇬🇵",date)
 
     }
     

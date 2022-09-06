@@ -14,22 +14,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let realm = try! Realm()
     
-    var todoArray = [String]()
-    var detailArray = [String]()
-    var dateArray = [String]()
-    
-    let ToDo = ["ベランダの天井を治す","管理会社とコンタクトをとる","引越したいから物件を探す","引越しにかかる費用を割り出す"]
+//    let ToDo = ["ベランダの天井を治す","管理会社とコンタクトをとる","引越したいから物件を探す","引越しにかかる費用を割り出す"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let userData = realm.objects(ToDo.self)
+        print(userData)
         
         // Do any additional setup after loading the view.
     }
     
     //セルの個数を指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ToDo.count
+        let userData = realm.objects(ToDo.self)
+        return userData.count
         
     }
     
@@ -37,9 +36,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //cellの取得
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath)
+        
+        let userData = realm.objects(ToDo.self)
         //表示する値の設定
-        cell.textLabel!.text = ToDo[indexPath.row]
+        cell.textLabel!.text = "\(userData[indexPath.row].title)"
         return cell
+    
     }
     
     
