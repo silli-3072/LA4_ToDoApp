@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var listView: UITableView!
+    
+    let realm = try! Realm()
     
     let ToDo = ["ベランダの天井を治す","管理会社とコンタクトをとる","引越したいから物件を探す","引越しにかかる費用を割り出す"]
     
