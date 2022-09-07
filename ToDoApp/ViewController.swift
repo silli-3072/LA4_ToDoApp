@@ -14,6 +14,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let realm = try! Realm()
     
+    var todoItem: Results<ToDo>!
+    
     //    let ToDo = ["ベランダの天井を治す","管理会社とコンタクトをとる","引越したいから物件を探す","引越しにかかる費用を割り出す"]
     
     override func viewDidLoad() {
@@ -24,6 +26,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // Do any additional setup after loading the view.
     }
+
     
     //セルの個数を指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,10 +51,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
             //削除処理を記述
-            let results = realm.objects(ToDo.self).filter()
+            //let results = realm.objects(ToDo.self).filter(indexPath.row)
             
             try! realm.write {
-                realm.delete(results)
+                realm.delete(self.todoItem[indexPath.row])
             }
             
             
