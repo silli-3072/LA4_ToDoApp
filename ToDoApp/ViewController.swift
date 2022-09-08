@@ -26,6 +26,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+        
+    }
 
     
     //セルの個数を指定
@@ -48,20 +55,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let userData = realm.objects(ToDo.self)
         
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
-            //削除処理を記述
-            //let results = realm.objects(ToDo.self).filter(indexPath.row)
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [self] (action, view, completionHandler) in
+        
+            let item = userData[indexPath.row]
             
             try! realm.write {
-                realm.delete(self.todoItem[indexPath.row])
+                self.realm.delete(item)
             }
-            
-            
+        
             completionHandler(true)
         }
         
         return UISwipeActionsConfiguration(actions: [deleteAction])
+        
+        tableView.reloadData()
     }
     
     
