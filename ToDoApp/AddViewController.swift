@@ -55,7 +55,7 @@ class AddViewController: UIViewController {
     @IBAction func save() {
         let todo = ToDo()
         todo.title = todoTextField.text!
-        todo.detail = dateTextField.text!
+        todo.detail = detailTextField.text!
         todo.date = dateTextField.text!
         
         try! realm.write {

@@ -8,11 +8,14 @@
 import UIKit
 import RealmSwift
 
+
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var listView: UITableView!
     
     let realm = try! Realm()
+    
+    var cellNumber = 0
     
     var todoItem: Results<ToDo>!
     
@@ -22,7 +25,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         
         let userData = realm.objects(ToDo.self)
-        print(userData)
         
         // Do any additional setup after loading the view.
     }
@@ -30,10 +32,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        tableView.reloadData()
+        let userData = realm.objects(ToDo.self)
+        
+        listView.reloadData()
+        
         
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDisplay" {
+            let nextView = segue.destination as! DetailViewController
+      
+            nextView.cellNum = cellNumber
+        }
+        
+    }
     
     //セルの個数を指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,8 +61,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath)
         
         let userData = realm.objects(ToDo.self)
+        
         //表示する値の設定
         cell.textLabel!.text = "\(userData[indexPath.row].title)"
+        
+        
         return cell
         
     }
@@ -58,21 +74,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let userData = realm.objects(ToDo.self)
         
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [self] (action, view, completionHandler) in
-        
+            
             let item = userData[indexPath.row]
             
             try! realm.write {
                 self.realm.delete(item)
             }
-        
+            
+            tableView.reloadData()
+            
             completionHandler(true)
         }
         
         return UISwipeActionsConfiguration(actions: [deleteAction])
-        
-        tableView.reloadData()
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        cellNumber = indexPath.row
+        
+        print("🎀",cellNumber)
+    }
+    
+    @IBAction func cellButton() {
+        print("🎀",cellNumber)
+        
+        
+    }
     
 }
 
