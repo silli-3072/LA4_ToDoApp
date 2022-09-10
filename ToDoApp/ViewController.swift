@@ -94,13 +94,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         cellNumber = indexPath.row
         
+        self.performSegue(withIdentifier: "toDetailViewController", sender: nil)
+        
         print("🎀",cellNumber)
     }
     
     @IBAction func cellButton() {
         print("🎀",cellNumber)
-        
-        
+
     }
     
 }
