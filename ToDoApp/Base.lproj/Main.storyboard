@@ -27,19 +27,10 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MSE-v7-OQe" id="vIZ-hf-ZMU">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="23a-WN-G6b">
-                                                    <rect key="frame" x="301" y="6" width="39" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" title="＞"/>
-                                                    <connections>
-                                                        <action selector="cellButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="J0w-7A-ORk"/>
-                                                        <segue destination="mGX-jU-i2x" kind="show" id="pef-te-LJo"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="mGX-jU-i2x" kind="show" identifier="DetailViewController" id="n6M-hP-fxo"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

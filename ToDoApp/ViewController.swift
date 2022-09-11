@@ -99,10 +99,5 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         print("🎀",cellNumber)
     }
     
-    @IBAction func cellButton() {
-        print("🎀",cellNumber)
-
-    }
-    
 }
 
